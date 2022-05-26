@@ -1,28 +1,26 @@
-function maskCPF(event_cpf,keyCode=0){
-    if(keyCode===0){
-        switch(event_cpf.length){
-            case 3:
-                event_cpf = `${event_cpf}.`;
-                break;
-            case 7:
-                event_cpf = `${event_cpf}.`;
-                break;
-            case 11:
-                event_cpf = `${event_cpf}-`;
-                break;
-            case 15:
-                event_cpf= event_cpf.substr(0, event_cpf.length-1);
-                break;
-            default:
-                event_cpf = event_cpf;
-                break;
-        }
-    } else {
-        if(keyCode===8){
-            event_cpf = event_cpf.substring(0, input_form.value.length-1);
-        }
+function maskCPF(event_cpf){
+    switch(event_cpf.length){
+        case 3:
+            event_cpf = `${event_cpf}.`;
+            break;
+        case 7:
+            event_cpf = `${event_cpf}.`;
+            break;
+        case 11:
+            event_cpf = `${event_cpf}-`;
+            break;
+        case 15:
+            event_cpf= event_cpf.substr(0, event_cpf.length-1);
+            break;
+        default:
+            event_cpf = event_cpf;
+            break;
     }
     return event_cpf;
+}
+
+function backspaceMask(value_input, keyCode){
+    return value_input = keyCode===8 ? value_input.substr(0, value_input.length-1) : value_input;
 }
 
 function isCPF(value){  

@@ -1,15 +1,37 @@
 const [
-    input_form,
+    input_forms,
     span,
     button
-] = [document.querySelector("input.input_form"),document.querySelector('span.span_form'), document.querySelector('button.btn')];
+] = [document.querySelectorAll("input.input_form"),document.querySelector('span.span_form'), document.querySelector('button.btn')];
 
-input_form.addEventListener('input', ()=>{
-    input_form.value = maskCPF(input_form.value);
-    span.innerHTML = removeSpecialChar(input_form.value);
+input_forms.forEach((input,ind_input)=>{
+    input.addEventListener('input', ()=>{    
+        switch(ind_input){
+            case 0: //CPF
+                input.value = maskCPF(input.value);
+                span.innerHTML = removeSpecialChar(input.value);
+        
+                if(isCPF(input.value)){
+                    input.style.border = "2px solid green";
+                } else {
+                    input.style.border = "2px solid red";
+                };
+                
+                break;
+            case 1: //CNPJ
 
-    // if(isCPF(input_form.value)){
-    // };
+                break;
+        }
+    });
+
+    input.addEventListener('keydown', (evt) => {
+        switch(ind_input){
+            case 0: //CPF
+                input.value = backspaceMask(input.value, evt.keyCode);
+                break;
+            case 1: //CNPJ
+                input.value = backspaceMask(input.value, evt.keyCode);
+                break;
+        }
+    });
 });
-
-input_form.addEventListener('keydown', evt=> input_form.value = maskCPF(input_form.value,evt.keyCode));
