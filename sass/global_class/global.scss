@@ -1,0 +1,29 @@
+#first_container{
+    @include displayMode(flex, center, row, center,0);
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    // border: 1px solid red;
+
+    .form{
+        // border: 1px solid blue;
+        padding: 10px;
+        width: 60%;
+        @include displayMode(flex, flex-start, column, center, 10px);
+
+
+        .label_form{
+            @include textPage(black, 15px, 500, 'Arial');
+        }
+
+        .input_form{
+            width: 100%;
+            outline: none;
+            border: 1px solid;
+            padding: 10px;
+            box-shadow: 0 0 0.75em rgb(160, 160, 160);
+        }
+    }
+}
