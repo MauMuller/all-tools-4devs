@@ -19,7 +19,8 @@ input_forms.forEach((input,ind_input)=>{
                 
                 break;
             case 1: //CNPJ
-
+                input.value = maskCPF(input.value);
+                span.innerHTML = removeSpecialChar(input.value);
                 break;
         }
     });
