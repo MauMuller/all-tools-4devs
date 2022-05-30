@@ -1,4 +1,5 @@
 function maskCPF(event_cpf){
+    console.log(event_cpf);
     switch(event_cpf.length){
         case 3:
             event_cpf = `${event_cpf}.`;
@@ -39,37 +40,32 @@ function isCPF(value){
     //Calculo para verficação
     if(arrChars.length===11){
         for(let i=0; i<arrChars.length; i++){
+            let soma=0, soma2=0, multiplicacao=10, multiplicacao2=11, resto=0, resto2=0;
 
-            if(arrChars[i]===arrChars[i+1]){
-                boolResp=false;
-                break;
-            } else {
-                let soma=0, soma2=0, multiplicacao=10, multiplicacao2=11, resto=0, resto2=0;
-
-                arrChars.forEach((val,ind_val)=>{
-                    if(ind_val < 9){
-                        soma += val * multiplicacao;
-                        multiplicacao--;
-                    }
-
-                    if(ind_val <= 9){
-                        soma2 += val * multiplicacao2;
-                        multiplicacao2--;
-                    }
-                });
-
-                resto = ((soma * 10) % 11);
-                resto = resto != 10 ? resto : 0;
-
-                resto2 = ((soma2 * 10) % 11);
-                resto2 = resto2 != 10 ? resto2 : 0;
-
-                if((resto === arrChars[9]) && (resto2 === arrChars[10])){
-                    boolResp=true;
-                } else {
-                    boolResp=false;
+            arrChars.forEach((val,ind_val)=>{
+                if(ind_val < 9){
+                    soma += val * multiplicacao;
+                    multiplicacao--;
                 }
+
+                if(ind_val <= 9){
+                    soma2 += val * multiplicacao2;
+                    multiplicacao2--;
+                }
+            });
+
+            resto = ((soma * 10) % 11);
+            resto = resto != 10 ? resto : 0;
+
+            resto2 = ((soma2 * 10) % 11);
+            resto2 = resto2 != 10 ? resto2 : 0;
+
+            if((resto === arrChars[9]) && (resto2 === arrChars[10])){
+                boolResp=true;
+            } else {
+                boolResp=false;
             }
+            break;
         }
     }
 
@@ -77,7 +73,6 @@ function isCPF(value){
 }
 
 function removeSpecialChar(value){
-    const regex = /[^\d]/g;
+    const regex = /[^\d]/gi;
     return value.replace(regex,"");
 }
-

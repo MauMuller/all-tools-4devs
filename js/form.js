@@ -3,12 +3,15 @@ const [
     span,
     button
 ] = [document.querySelectorAll("input.input_form"),document.querySelector('span.span_form'), document.querySelector('button.btn')];
+let pasteEvt=false;
 
 input_forms.forEach((input,ind_input)=>{
     input.addEventListener('input', ()=>{    
         switch(ind_input){
             case 0: //CPF
-                input.value = maskCPF(input.value);
+                if(!pasteEvt){
+                    input.value = maskCPF(input.value);
+                }
                 span.innerHTML = removeSpecialChar(input.value);
         
                 if(isCPF(input.value)){
@@ -17,10 +20,11 @@ input_forms.forEach((input,ind_input)=>{
                     input.style.border = "2px solid red";
                 };
                 
+                pasteEvt=false;
                 break;
             case 1: //CNPJ
-                input.value = maskCPF(input.value);
-                span.innerHTML = removeSpecialChar(input.value);
+                // input.value = maskCPF(input.value);
+                // span.innerHTML = removeSpecialChar(input.value);
                 break;
         }
     });
@@ -34,5 +38,9 @@ input_forms.forEach((input,ind_input)=>{
                 input.value = backspaceMask(input.value, evt.keyCode);
                 break;
         }
+    });
+
+    input.addEventListener('paste',(evt)=>{
+        evt.preventDefault();
     });
 });
